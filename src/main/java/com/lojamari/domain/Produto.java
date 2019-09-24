@@ -24,11 +24,11 @@ public class Produto implements Serializable {
 	
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA",
+	@JoinTable(name = "PRODUTO_SUBCATEGORIA",
 			joinColumns = @JoinColumn(name = "produto_id"),
-			inverseJoinColumns = @JoinColumn(name = "categoria_id")
+			inverseJoinColumns = @JoinColumn(name = "subCategoria_id")
 	)
-	private List<Categoria> categorias  = new ArrayList<>();
+	private List<SubCategoria> subCategorias  = new ArrayList<>();
 
 	
 	public Produto() {
@@ -66,21 +66,22 @@ public class Produto implements Serializable {
 	}
 
 
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-
-
+	
 	public Produto(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+
+
+	public List<SubCategoria> getSubCategorias() {
+		return subCategorias;
+	}
+
+
+	public void setSubCategorias(List<SubCategoria> subCategorias) {
+		this.subCategorias = subCategorias;
 	}
 
 
