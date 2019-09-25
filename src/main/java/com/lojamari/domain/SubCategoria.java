@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class SubCategoria implements Serializable {
@@ -24,7 +23,7 @@ public class SubCategoria implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "SUBCATEGORIA_CATEGORIA",
 			joinColumns = @JoinColumn(name = "sucategoria_id"),
@@ -34,7 +33,7 @@ public class SubCategoria implements Serializable {
 	
 	
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToMany(mappedBy ="subCategorias")
 	private List<Produto> produtos = new ArrayList<>();
 	

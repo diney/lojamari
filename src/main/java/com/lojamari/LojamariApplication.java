@@ -13,6 +13,7 @@ import com.lojamari.domain.Cidade;
 import com.lojamari.domain.Cliente;
 import com.lojamari.domain.Endereco;
 import com.lojamari.domain.Estado;
+import com.lojamari.domain.ItemPedido;
 import com.lojamari.domain.Pagamento;
 import com.lojamari.domain.PagamentoComCartao;
 import com.lojamari.domain.Pedido;
@@ -25,6 +26,7 @@ import com.lojamari.repository.CidadeRepository;
 import com.lojamari.repository.ClienteRepository;
 import com.lojamari.repository.EnderecoRepository;
 import com.lojamari.repository.EstadoRepository;
+import com.lojamari.repository.ItemPedidoRepository;
 import com.lojamari.repository.PagamentoRepository;
 import com.lojamari.repository.PedidoRepository;
 import com.lojamari.repository.ProdutoRepository;
@@ -59,6 +61,10 @@ public class LojamariApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository  pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository  itemPedidoRepository;
+
 
 
 	public static void main(String[] args) {
@@ -141,6 +147,13 @@ public class LojamariApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1));
 		pagamentoRepository.saveAll(Arrays.asList(pagt1));
+		
+		ItemPedido ip1 = new ItemPedido(ped1,p1 , 0.00, 1, 150.00);
+		ped1.getItens().addAll(Arrays.asList(ip1));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1));
 
 	}
 
