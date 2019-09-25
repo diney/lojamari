@@ -1,5 +1,6 @@
 package com.lojamari;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,20 @@ import com.lojamari.domain.Cidade;
 import com.lojamari.domain.Cliente;
 import com.lojamari.domain.Endereco;
 import com.lojamari.domain.Estado;
+import com.lojamari.domain.Pagamento;
+import com.lojamari.domain.PagamentoComCartao;
+import com.lojamari.domain.Pedido;
 import com.lojamari.domain.Produto;
 import com.lojamari.domain.SubCategoria;
+import com.lojamari.domain.enums.EstadoPagamento;
 import com.lojamari.domain.enums.TipoCliente;
 import com.lojamari.repository.CategoriaRepository;
 import com.lojamari.repository.CidadeRepository;
 import com.lojamari.repository.ClienteRepository;
 import com.lojamari.repository.EnderecoRepository;
 import com.lojamari.repository.EstadoRepository;
+import com.lojamari.repository.PagamentoRepository;
+import com.lojamari.repository.PedidoRepository;
 import com.lojamari.repository.ProdutoRepository;
 import com.lojamari.repository.SubCategoriaRepository;
 
@@ -46,6 +53,12 @@ public class LojamariApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository  pagamentoRepository;
 
 
 	public static void main(String[] args) {
@@ -116,6 +129,18 @@ public class LojamariApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("25/09/2019 13:35"), cli1);
+		
+		Pagamento pagt1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagt1);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1));
+		pagamentoRepository.saveAll(Arrays.asList(pagt1));
 
 	}
 
