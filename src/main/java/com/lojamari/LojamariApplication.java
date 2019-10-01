@@ -78,6 +78,9 @@ public class LojamariApplication implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Vestidos");		
 		Categoria cat2 = new Categoria(null, "Blusas");		
 		Categoria cat3 = new Categoria(null, "Saias");
+		Categoria cat4 = new Categoria(null, "Meias");
+		Categoria cat5 = new Categoria(null, "Cuecas");
+		Categoria cat6 = new Categoria(null, "Biquine");
 		
 		//Subcategorias criadas
 		SubCategoria subCat1 = new SubCategoria(null,"Vestido com estampa");
@@ -110,7 +113,7 @@ public class LojamariApplication implements CommandLineRunner {
 			
 		
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2,cat3));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2,cat3,cat4,cat5,cat6));
 		subCategoriaRepository.saveAll(Arrays.asList(subCat1, subCat2, subCat3, subCat4));
 		produtoRepository.saveAll(Arrays.asList(p1, p2,p3,p4));
 		

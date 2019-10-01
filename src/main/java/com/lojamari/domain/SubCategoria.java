@@ -33,7 +33,7 @@ public class SubCategoria implements Serializable {
 	
 	
 	
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy ="subCategorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
