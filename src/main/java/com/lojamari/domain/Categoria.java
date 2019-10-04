@@ -20,7 +20,7 @@ public class Categoria implements Serializable{
 	private String nome;
 	
 	
-	@ManyToMany(cascade=CascadeType.ALL,mappedBy ="subCategorias")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy ="categorias")
 	private List<SubCategoria> subCategorias = new ArrayList<>();
 	
 	public Categoria() {

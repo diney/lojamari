@@ -89,10 +89,10 @@ public class LojamariApplication implements CommandLineRunner {
 		SubCategoria subCat4 = new SubCategoria(null, "Blusas Floral  ");
 		
 		//Produtos  criadas
-		Produto p1 = new Produto(null, "Vestido com estampa", 150.00);
-		Produto p2 = new Produto(null, "Blusa com estampa", 100.00);
-		Produto p3 = new Produto(null, "Saia Linho Estampada", 170.00);
-		Produto p4 = new Produto(null, "Blusas Floral  Decote Largo Manga Curta", 70.00);
+		Produto p1 = new Produto(null, "Vestido com estampa", 150.00, null, null);
+		Produto p2 = new Produto(null, "Blusa com estampa", 100.00, null, null);
+		Produto p3 = new Produto(null, "Saia Linho Estampada", 170.00, null, null);
+		Produto p4 = new Produto(null, "Blusas Floral  Decote Largo Manga Curta", 70.00, null, null);
 		
 		//Categoria recebe subCategoria
 		cat1.getSubCategorias().addAll(Arrays.asList(subCat1 ));
@@ -101,9 +101,9 @@ public class LojamariApplication implements CommandLineRunner {
 		cat2.getSubCategorias().addAll(Arrays.asList(subCat4 ));
 		
 		//SubCategoria vê a sua categoria
-		subCat1.getSubCategorias().addAll(Arrays.asList(cat1));
-		subCat2.getSubCategorias().addAll(Arrays.asList(cat1));		
-		subCat3.getSubCategorias().addAll(Arrays.asList(cat3));
+		subCat1.getCategorias().addAll(Arrays.asList(cat1));
+		subCat2.getCategorias().addAll(Arrays.asList(cat1));		
+		subCat3.getCategorias().addAll(Arrays.asList(cat3));
 		
 		//Produto recebe subCategoria
 		p1.getSubCategorias().addAll(Arrays.asList(subCat1));

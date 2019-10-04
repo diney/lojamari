@@ -29,7 +29,7 @@ public class SubCategoria implements Serializable {
 			joinColumns = @JoinColumn(name = "sucategoria_id"),
 			inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
-	private List<Categoria> subCategorias  = new ArrayList<>();
+	private List<Categoria> categorias  = new ArrayList<>();
 	
 	
 	
@@ -69,19 +69,18 @@ public class SubCategoria implements Serializable {
 		this.nome = nome;
 	}
 
-
-	public List<Categoria> getSubCategorias() {
-		return subCategorias;
-	}
-
-
-	public void setSubCategorias(List<Categoria> subCategorias) {
-		this.subCategorias = subCategorias;
-	}
-
-
 	public List<Produto> getProdutos() {
 		return produtos;
+	}
+
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 

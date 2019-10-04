@@ -24,6 +24,8 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
+	private String fornecedor;
+	private String cor;
 	
 	@JsonIgnore
 	@ManyToMany
@@ -41,11 +43,13 @@ public class Produto implements Serializable {
 		
 	}
 	
-	public Produto(Integer id, String nome, Double preco) {
+	public Produto(Integer id, String nome, Double preco,String fornecedor,String cor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+		this.fornecedor = fornecedor;
+		this.cor = cor;
 	}
 	
 	@JsonIgnore
@@ -103,6 +107,22 @@ public class Produto implements Serializable {
 		return itens;
 	}
 
+
+	public String getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(String fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
 
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
