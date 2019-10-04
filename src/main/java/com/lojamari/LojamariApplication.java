@@ -152,11 +152,12 @@ public class LojamariApplication implements CommandLineRunner {
 		pagamentoRepository.saveAll(Arrays.asList(pagt1));
 		
 		ItemPedido ip1 = new ItemPedido(ped1,p1 , 0.00, 1, 150.00);
-		ped1.getItens().addAll(Arrays.asList(ip1));
+		ItemPedido ip2 = new ItemPedido(ped1,p2 , 0.00, 3, 50.00);
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
 		
-		p1.getItens().addAll(Arrays.asList(ip1));
+		p1.getItens().addAll(Arrays.asList(ip1,ip2));
 		
-		itemPedidoRepository.saveAll(Arrays.asList(ip1));
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2));
 
 	}
 
