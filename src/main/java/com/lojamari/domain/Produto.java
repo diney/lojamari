@@ -16,97 +16,95 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Double preco;
+	private Double precoCompra;
+	private Double precoVenda;
 	private String fornecedor;
 	private String cor;
-	
+
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_SUBCATEGORIA",
-			joinColumns = @JoinColumn(name = "produto_id"),
-			inverseJoinColumns = @JoinColumn(name = "subCategoria_id")
-	)
-	private List<SubCategoria> subCategorias  = new ArrayList<>();
-	
+	@JoinTable(name = "PRODUTO_SUBCATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "subCategoria_id"))
+	private List<SubCategoria> subCategorias = new ArrayList<>();
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
-	
+
 	public Produto() {
-		
+
 	}
-	
-	public Produto(Integer id, String nome, Double preco,String fornecedor,String cor) {
+
+	public Produto(Integer id, String nome, Double precoCompra,Double precoVenda,String fornecedor,String cor) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.preco = preco;
+		this.precoCompra = precoCompra;
+		this.precoVenda = precoVenda;
 		this.fornecedor = fornecedor;
 		this.cor = cor;
 	}
-	
+
 	@JsonIgnore
-	public List<Pedido> getPedidos(){
+	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
-		for(ItemPedido x : itens) {
+		for (ItemPedido x : itens) {
 			lista.add(x.getPedido());
-						
+
 		}
 		return lista;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
-	public Double getPreco() {
-		return preco;
+	public Double getPrecoCompra() {
+		return precoCompra;
 	}
 
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setPrecoCompra(Double precoCompra) {
+		this.precoCompra = precoCompra;
 	}
 
+	public Double getPrecoVenda() {
+		return precoVenda;
+	}
+
+	public void setPrecoVenda(Double precoVenda) {
+		this.precoVenda = precoVenda;
+	}
 
 	public List<SubCategoria> getSubCategorias() {
 		return subCategorias;
 	}
 
-
 	public void setSubCategorias(List<SubCategoria> subCategorias) {
 		this.subCategorias = subCategorias;
 	}
 
-
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
-
 
 	public String getFornecedor() {
 		return fornecedor;
@@ -128,7 +126,6 @@ public class Produto implements Serializable {
 		this.itens = itens;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,7 +133,6 @@ public class Produto implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

@@ -21,7 +21,7 @@ public class ProdutoDTO implements Serializable {
 		
 		id = obj.getId();
 		nome = obj.getNome();
-		preco  = obj.getPreco();
+		preco  = obj.getPrecoVenda();
 		cor = obj.getCor();
 		fornecedor = obj.getFornecedor();
 		
