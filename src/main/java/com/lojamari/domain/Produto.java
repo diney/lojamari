@@ -31,8 +31,10 @@ public class Produto implements Serializable {
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_SUBCATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "subCategoria_id"))
-	private List<SubCategoria> subCategorias = new ArrayList<>();
+	@JoinTable(name = "PRODUTO_CATEGORIA",
+		joinColumns = @JoinColumn(name = "produto_id"),
+		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	private List<Categoria> categorias = new ArrayList<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
@@ -94,13 +96,7 @@ public class Produto implements Serializable {
 		this.precoVenda = precoVenda;
 	}
 
-	public List<SubCategoria> getSubCategorias() {
-		return subCategorias;
-	}
-
-	public void setSubCategorias(List<SubCategoria> subCategorias) {
-		this.subCategorias = subCategorias;
-	}
+	
 
 	public Set<ItemPedido> getItens() {
 		return itens;
@@ -124,6 +120,14 @@ public class Produto implements Serializable {
 
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 	@Override

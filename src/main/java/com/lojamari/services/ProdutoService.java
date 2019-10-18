@@ -9,10 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.lojamari.domain.Categoria;
 import com.lojamari.domain.Produto;
-import com.lojamari.domain.SubCategoria;
+import com.lojamari.repository.CategoriaRepository;
 import com.lojamari.repository.ProdutoRepository;
-import com.lojamari.repository.SubCategoriaRepository;
 import com.lojamari.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -20,12 +20,12 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repo;
 	
-	/*
-	 * @Autowired private CategoriaRepository categoriaRepository ;
-	 */
 	
-	@Autowired
-	private SubCategoriaRepository subCategoriaRepository ;	
+	 @Autowired
+	 private CategoriaRepository categoriaRepository ;
+	
+	
+	
 
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
@@ -33,11 +33,11 @@ public class ProdutoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produto.class.getName()));
 	}
 	
-	public Page<Produto> search(String nome ,List<Integer> idsSub,Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Produto> search(String nome ,List<Integer> idsCat,Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		List<SubCategoria> subCategorias = subCategoriaRepository.findAllById(idsSub);
+		List<Categoria> categorias = categoriaRepository.findAllById(idsCat);
 		//List<Categoria> categorias = categoriaRepository.findAllById(idsCat);
-		return repo.search(nome,subCategorias, pageRequest);
+		return repo.search(nome,categorias, pageRequest);
 		
 		
 		
