@@ -12,6 +12,7 @@ public class ProdutoDTO implements Serializable {
 	private Double preco;
 	private String fornecedor;
 	private String cor;
+	private String tamanho;
 
 	public ProdutoDTO() {
 
@@ -24,6 +25,7 @@ public class ProdutoDTO implements Serializable {
 		preco  = obj.getPrecoVenda();
 		cor = obj.getCor();
 		fornecedor = obj.getFornecedor();
+		tamanho = obj.getTamanho();
 		
 
 	}
@@ -66,6 +68,14 @@ public class ProdutoDTO implements Serializable {
 
 	public void setCor(String cor) {
 		this.cor = cor;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
 	}
 
 }

@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lojamari.domain.Cliente;
 import com.lojamari.dto.ClienteDTO;
-import com.lojamari.dto.ClienteNewDTO;
 import com.lojamari.services.ClienteService;
 
 @RestController
@@ -37,8 +36,14 @@ public class ClienteResource {
 				
 	}
 	
+	@RequestMapping(value="/nome", method=RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String nome) {
+		Cliente obj = service.findByNome(nome);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@RequestMapping(method =RequestMethod.POST )
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) throws IllegalAccessException{	
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) throws IllegalAccessException{	
 		Cliente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().

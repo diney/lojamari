@@ -2,6 +2,7 @@ package com.lojamari.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +20,13 @@ public interface ProdutoRepository extends JpaRepository<Produto,Integer > {
 	@Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat   WHERE obj.nome LIKE %:nome% AND cat IN :categorias   ")
 	Page<Produto> search(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
 	
+	@Query("SELECT DISTINCT obj FROM Produto obj  WHERE obj.id =?1 and situacao = 1   ")
+	Optional<Produto>  findBySituacaoTrue(Integer id);
 	
-	//Page<Produto> findDistinctByNomeContainingAndSubCategoriasIn(@Param("nome") String nome, @Param("subCategorias") List<SubCategoria> subCategorias, Pageable pageRequest);
+	
+	@Query("SELECT COUNT (DISTINCT id) FROM Produto obj  WHERE  obj.situacao = 1")
+	long  count();
+	
 	}
 
 

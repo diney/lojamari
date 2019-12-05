@@ -28,6 +28,9 @@ public class Produto implements Serializable {
 	private Double precoVenda;
 	private String fornecedor;
 	private String cor;
+	private String tamanho;
+	private boolean situacao;
+	
 
 	@JsonIgnore
 	@ManyToMany
@@ -44,7 +47,7 @@ public class Produto implements Serializable {
 
 	}
 
-	public Produto(Integer id, String nome, Double precoCompra,Double precoVenda,String fornecedor,String cor) {
+	public Produto(Integer id, String nome, Double precoCompra,Double precoVenda,String fornecedor,String cor,String tamanho, boolean situacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -52,6 +55,8 @@ public class Produto implements Serializable {
 		this.precoVenda = precoVenda;
 		this.fornecedor = fornecedor;
 		this.cor = cor;
+		this.tamanho = tamanho;
+		this.situacao = situacao;
 	}
 
 	@JsonIgnore
@@ -128,6 +133,22 @@ public class Produto implements Serializable {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public boolean isSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(boolean situacao) {
+		this.situacao = situacao;
 	}
 
 	@Override

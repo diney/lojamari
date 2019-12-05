@@ -27,8 +27,8 @@ public class PagamentoComDinheiro extends Pagamento{
 		return dataPagamento;
 	}
 
-	public void setDataPagamento(Date dataPagamento) {
-		this.dataPagamento = dataPagamento;
+	public void setDataPagamento(Date dataPagamento) {		
+		this.dataPagamento = (new Date());
 	}
 
 	

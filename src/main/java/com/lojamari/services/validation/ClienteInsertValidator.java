@@ -9,45 +9,66 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lojamari.domain.Cliente;
-import com.lojamari.domain.enums.TipoCliente;
-import com.lojamari.dto.ClienteNewDTO;
+import com.lojamari.dto.ClienteDTO;
 import com.lojamari.repository.ClienteRepository;
 import com.lojamari.resources.exception.FieldMessage;
-import com.lojamari.services.validation.utils.BR;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteDTO> {
 
 	@Autowired
 	private ClienteRepository repo;
-	
+
 	@Override
 	public void initialize(ClienteInsert ann) {
 	}
 
 	@Override
-	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
-		
+	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
+
 		List<FieldMessage> list = new ArrayList<>();
-		
-		if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
-		}
 
-		if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
-		}
+		/*
+		 * if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) &&
+		 * !BR.isValidCPF(objDto.getCpfOuCnpj())) { list.add(new
+		 * FieldMessage("cpfOuCnpj", "CPF inválido")); }
+		 */
 
+		/*
+		 * if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) &&
+		 * !BR.isValidCNPJ(objDto.getCpfOuCnpj())) { list.add(new
+		 * FieldMessage("cpfOuCnpj", "CNPJ inválido")); }
+		 */
+         if(objDto.getEmail()!=null) {
+        	 Cliente aux = repo.findByEmail(objDto.getEmail());
+     		if (aux != null) {
+     			list.add(new FieldMessage("email", "Email já existente"));
+     		} 
+         }
 		
-		 Cliente aux = repo.findByEmail(objDto.getEmail()); if (aux != null) {
-		 list.add(new FieldMessage("email", "Email já existente")); }
 		
-		
-		for (FieldMessage e : list) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
-					.addConstraintViolation();
+		/*
+		 * if (objDto.getEmail()==null) {
+		 * 
+		 * for (FieldMessage e : list) { context.disableDefaultConstraintViolation();
+		 * context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(
+		 * e.getFieldName()) .addConstraintViolation(); } return list.isEmpty();}
+		 */
+		/*
+		 * if (aux.equals( " ")){ for (FieldMessage e : list) {
+		 * context.disableDefaultConstraintViolation();
+		 * context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(
+		 * e.getFieldName()) .addConstraintViolation(); } return list.isEmpty();
+		 * 
+		 * }
+		 */
+			for (FieldMessage e : list) {
+				context.disableDefaultConstraintViolation();
+				context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
+						.addConstraintViolation();
+			}
+			return list.isEmpty();
 		}
-		return list.isEmpty();
+		
+
 	}
 
-}

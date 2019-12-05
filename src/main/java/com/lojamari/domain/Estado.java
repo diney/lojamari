@@ -28,6 +28,11 @@ public class Estado implements Serializable {
 	public Estado() {
 
 	}
+	
+	public Estado(Estado obj) {
+		id = obj.getId();
+		nome = obj.getNome();
+	}
 
 	public Estado(Integer id, String nome) {
 		super();

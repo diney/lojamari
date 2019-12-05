@@ -20,8 +20,6 @@ import com.lojamari.domain.PagamentoComCartao;
 import com.lojamari.domain.Pedido;
 import com.lojamari.domain.Produto;
 import com.lojamari.domain.enums.EstadoPagamento;
-import com.lojamari.domain.enums.Perfil;
-import com.lojamari.domain.enums.TipoCliente;
 import com.lojamari.repository.AdminRepository;
 import com.lojamari.repository.CategoriaRepository;
 import com.lojamari.repository.CidadeRepository;
@@ -32,9 +30,9 @@ import com.lojamari.repository.ItemPedidoRepository;
 import com.lojamari.repository.PagamentoRepository;
 import com.lojamari.repository.PedidoRepository;
 import com.lojamari.repository.ProdutoRepository;
-
 @Service
 public class DBService {
+	
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -80,10 +78,10 @@ public class DBService {
 		Categoria cat6 = new Categoria(null, "Biquine");
 
 		// Produtos criadas
-		Produto p1 = new Produto(null, "Vestido com estampa", 10.00, 100.00, null, null);
-		Produto p2 = new Produto(null, "Blusa com estampa", 10.00, 100.00, null, null);
-		Produto p3 = new Produto(null, "Saia Linho Estampada", 10.00, 170.00, null, null);
-		Produto p4 = new Produto(null, "Blusas Floral  Decote Largo Manga Curta", 10.00, 70.00, null, null);
+		Produto p1 = new Produto(null, "Vestido com estampa", 10.00, 100.00, null, null, null, false);
+		Produto p2 = new Produto(null, "Blusa com estampa", 10.00, 100.00, null, null, null, false);
+		Produto p3 = new Produto(null, "Saia Linho Estampada", 10.00, 170.00, null, null, null, false);
+		Produto p4 = new Produto(null, "Blusas Floral  Decote Largo Manga Curta", 10.00, 70.00, null, null, null, false);
 
 		// Categoria recebe subCategoria
 		cat1.getProdutos().addAll(Arrays.asList(p1));
@@ -119,12 +117,12 @@ public class DBService {
 		
 		adminRepository.saveAll(Arrays.asList(admin,admin2));
 		
-		Cliente cli1 = new Cliente(null, "Diney", "diney.dom@gmail.com", "123456789", TipoCliente.PESSOAFISICA);
-		cli1.getTelefones().addAll(Arrays.asList("12345678", "09876542"));
+		Cliente cli1 = new Cliente(null, "Diney", "diney.dom@gmail.com", "123456789");
+		
 
 		Endereco e1 = new Endereco(null, "Joaquin Neves", "300", "", "Pântano do Sul ", "88067120", cli1, c1);
 
-		cli1.getEnderecos().addAll(Arrays.asList(e1));
+		
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1));
@@ -133,7 +131,7 @@ public class DBService {
 
 		Pedido ped1 = new Pedido(null, sdf.parse("25/09/2019 13:35"), cli1);
 
-		Pagamento pagt1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		Pagamento pagt1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6, null);
 		ped1.setPagamento(pagt1);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1));
@@ -150,5 +148,6 @@ public class DBService {
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2));
 
 	}
+
 
 }

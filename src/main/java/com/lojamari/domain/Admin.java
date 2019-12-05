@@ -27,18 +27,15 @@ public class Admin implements Serializable {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
-	
+	private Set<Integer> perfis = new HashSet<>();	
 	
 	private String senha;
 	
 	
-	public Admin() {
-		
-		addPerfil(Perfil.ADMIN);
-	
-		
+	public Admin() {	
+		addPerfil(Perfil.ADMIN);	
 	}
+
 	public Admin(Integer id,String nome, String senha) {
 		super();
 		this.id = id;

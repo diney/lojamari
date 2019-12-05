@@ -2,14 +2,13 @@ package com.lojamari.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.lojamari.domain.Cliente;
-import com.lojamari.services.validation.ClienteUpdate;
-@ClienteUpdate
+import com.lojamari.services.validation.ClienteInsert;
+@ClienteInsert
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -19,9 +18,10 @@ public class ClienteDTO implements Serializable {
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="Email inválido")
+	
 	private String email;
+	
+	private String telefone;	
 	
 	public ClienteDTO() {
 		
@@ -31,6 +31,7 @@ public class ClienteDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
+		telefone = obj.getTelefone();
 		
 	}
 
@@ -57,5 +58,15 @@ public class ClienteDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	
 
 }
